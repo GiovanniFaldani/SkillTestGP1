@@ -16,29 +16,37 @@ public struct Health
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] private CharacterData characterData;
+    [SerializeField] protected CharacterData characterData;
 
     // internals
-    private Health health = new Health();
-    private float moveSpeed;
-    private int damage;
+    protected Health health = new Health();
+    protected float moveSpeed;
+    protected int damage;
 
     // component shorthands
-    private Rigidbody2D _rb;
-    private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
+    protected Rigidbody2D _rb;
+    protected Animator _animator;
+    protected SpriteRenderer _spriteRenderer;
 
     // movement
-    [Range(-1,1)] private float x; 
+    [Range(-1,1)] protected float x;
+    [Range(-1, 1)] protected float y;
 
     void Awake()
     {
-        _rb = GetComponentInChildren<Rigidbody2D>();
-        _animator = GetComponentInChildren<Animator>();
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        // load characterData
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         health = new Health(characterData.maxHealth, false);
         moveSpeed = characterData.moveSpeed;
         damage = characterData.damage;
+        _animator.runtimeAnimatorController = characterData.animController;
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void Movement()
