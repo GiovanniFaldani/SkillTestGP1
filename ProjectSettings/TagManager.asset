@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Floor
+  - Enemy
+  - Ally
+  - Collectible
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,7 @@
 using UnityEditor.Animations;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterData", menuName = "CharacterData")]
+[CreateAssetMenu(fileName = "CharacterData", menuName = "GameData/CharacterData")]
 public class CharacterData : ScriptableObject
 {
     public int maxHealth;

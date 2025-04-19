@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2716772139722053898}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: b6aa2172dd5d94c41a5c6c8c8d772acf, type: 2}
-  jumpForce: 10
+  jumpForce: 1000
   isGrounded: 0
 --- !u!61 &2716772139722053898
 BoxCollider2D:

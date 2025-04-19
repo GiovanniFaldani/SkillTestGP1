@@ -1,19 +1,5 @@
 using UnityEngine;
 
-public struct Health
-{
-    public int maxHealth;
-    public int currentHealth;
-    public bool invincibe;
-
-    public Health(int maxHealth, bool invincible)
-    {
-        this.maxHealth = maxHealth;
-        this.currentHealth = maxHealth;
-        this.invincibe = invincible;
-    }
-}
-
 public abstract class Character : MonoBehaviour
 {
     [SerializeField] protected CharacterData characterData;
