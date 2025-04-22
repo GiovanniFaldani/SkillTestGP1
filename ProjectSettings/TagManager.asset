@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Ally
   - Collectible
+  - PlayerAction
+  - EnemyAction
+  - AllyAction
   layers:
   - Default
   - TransparentFX

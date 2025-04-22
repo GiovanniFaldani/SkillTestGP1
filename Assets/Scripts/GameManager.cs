@@ -5,8 +5,9 @@ public class GameManager : MonoBehaviour
     // Sinlgeton behavior
     public static GameManager instance {  get; private set; }
 
-    private int score;
-    private int bestScore;
+    [Header("Debug variables")]
+    [SerializeField] private int score;
+    [SerializeField] private int bestScore;
 
     private void Awake()
     {
@@ -36,6 +37,10 @@ public class GameManager : MonoBehaviour
     public void AddToScore(int scoreToAdd)
     {
         score += scoreToAdd;
+        if (score > bestScore)
+        {
+            bestScore = score;
+        }
     }
 
     public void SaveBestScore(int newBestScore)

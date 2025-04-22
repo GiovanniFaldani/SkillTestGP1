@@ -6,13 +6,16 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerAction"))
         {
-            Player player = other.GetComponent<Player>();
+            Player player = other.GetComponentInParent<Player>();
             switch (collectibleData.effect)
             {
                 case CollectibleEffects.Heal:
-                    player.AddToHealth(collectibleData.healAmount);
+                    player.AddHealth(collectibleData.healAmount);
+                    break;
+                case CollectibleEffects.Invincibiliy:
+                    player.SetInvincibile(true, collectibleData.duration);
                     break;
                 case CollectibleEffects.SpeedUp:
                     player.ModifySpeed(collectibleData.speedBonus, collectibleData.duration);

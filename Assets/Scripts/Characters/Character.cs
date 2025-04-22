@@ -5,9 +5,13 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected CharacterData characterData;
 
     // internals
-    protected Health health = new Health();
+    [SerializeField] protected Health health = new Health();
     protected float moveSpeed;
     protected int damage;
+
+    // timers
+    [SerializeField] protected float _invincibleTimer;
+    protected float _speedModTimer;
 
     // component shorthands
     protected Rigidbody2D _rb;
@@ -37,10 +41,10 @@ public abstract class Character : MonoBehaviour
 
     public void Movement()
     {
-        _rb.linearVelocity = new Vector2(x * moveSpeed, _rb.linearVelocity.y);
+        _rb.linearVelocity = new Vector2(x * moveSpeed * Time.deltaTime, _rb.linearVelocity.y);
     }
 
-    public void AddToHealth(int addMe)
+    public void AddHealth(int addMe)
     {
         if(health.currentHealth + addMe > health.maxHealth)
         {
@@ -50,6 +54,20 @@ public abstract class Character : MonoBehaviour
         {
             health.currentHealth += addMe;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!health.invincible)
+        {
+            health.currentHealth -= damage;
+        }
+    }
+
+    public void SetInvincibile(bool state, float duration)
+    {
+        health.invincible = state;
+        _invincibleTimer = duration;
     }
 
     public abstract void PerformAction();

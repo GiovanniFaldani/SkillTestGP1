@@ -1,19 +1,15 @@
-using System.Runtime.CompilerServices;
-using UnityEditor.Tilemaps;
+using System.Collections;
 using UnityEngine;
 
 public class Player : Character
 {
     [SerializeField] private float jumpForce;
-    [SerializeField] private bool isGrounded = false;
-    
-    private float _baseSpeed;
-    private float _speedModTimer;
+    [SerializeField] private GameObject action;
+    private bool isGrounded = false;
 
-    public override void PerformAction()
-    {
-        throw new System.NotImplementedException();
-    }
+    private float _baseSpeed;
+    private bool _doBlink = true;
+
 
     void Start()
     {
@@ -27,6 +23,8 @@ public class Player : Character
         Flip();
         Movement();
         Jump();
+        InvincibleBlink();
+        PerformAction();
     }
 
     private void UpdateTimers()
@@ -34,9 +32,17 @@ public class Player : Character
         if (_speedModTimer > 0)
         {
             _speedModTimer -= Time.deltaTime;
-            if (_speedModTimer < 0)
+            if (_speedModTimer <= 0)
             {
                 moveSpeed = _baseSpeed;
+            }
+        }
+        if (_invincibleTimer > 0)
+        {
+            _invincibleTimer -= Time.deltaTime;
+            if(_invincibleTimer <= 0)
+            {
+                health.invincible = false;
             }
         }
     }
@@ -49,9 +55,18 @@ public class Player : Character
 
     private void Flip()
     {
-        if (x < 0) _spriteRenderer.flipX = true;
-        else _spriteRenderer.flipX = false;
-        
+        if (x < 0)
+        {
+            _spriteRenderer.flipX = true;
+            Vector3 pos = action.transform.localPosition;
+            action.transform.localPosition = new Vector3(-0.2f, pos.y, pos.z);
+        }
+        else if (x > 0)
+        {
+            _spriteRenderer.flipX = false;
+            Vector3 pos = action.transform.localPosition;
+            action.transform.localPosition = new Vector3(0.2f, pos.y, pos.z);
+        }
     }
 
     private void Jump()
@@ -60,6 +75,14 @@ public class Player : Character
         {
             _rb.AddForce(new Vector2(0, Mathf.Round(y)) * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
+        }
+    }
+
+    public override void PerformAction()
+    {
+        if(Input.GetAxis("Fire1") > 0)
+        {
+            action.SetActive(true);
         }
     }
 
@@ -86,7 +109,31 @@ public class Player : Character
 
     private void InvincibleBlink()
     {
+        if(_invincibleTimer > 0 && _doBlink)
+        {
+            // blink sprite
+            StartCoroutine(BlinkSprite());
+            _doBlink = false;
+        }
+    }
 
+    private IEnumerator BlinkSprite()
+    {
+        float t = _invincibleTimer;
+        float blinkTimer = 0.025f;
+        while (t > 0)
+        {
+            _spriteRenderer.enabled = !_spriteRenderer.enabled;
+            yield return new WaitForSeconds(blinkTimer);
+            t -= blinkTimer + Time.deltaTime;
+        }
+        _spriteRenderer.enabled = true;
+        _doBlink = true;
+    }
+
+    public int GetDamage()
+    {
+        return this.damage;
     }
 
 }
