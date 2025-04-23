@@ -23,6 +23,7 @@ public class Enemy : Character
         CheckHealth();
         CheckAttackAndMovement();
         Flip();
+        Movement();
     }
 
     private void CheckHealth()
@@ -56,7 +57,7 @@ public class Enemy : Character
         return false;
     }
 
-    public bool checkAttackRadius(float playerPosition, float enemyPosition)
+    public bool CheckAttackRadius(float playerPosition, float enemyPosition)
     {
         if (Mathf.Abs(playerPosition - enemyPosition) < attackRadius) return true;
         return false;
@@ -69,9 +70,10 @@ public class Enemy : Character
             //if player in front of the enemy
             if (_playerTransform.position.x < transform.position.x)
             {
-                if (checkAttackRadius(_playerTransform.position.x, transform.position.x))
+                if (CheckAttackRadius(_playerTransform.position.x, transform.position.x))
                 {
                     // ATTACK
+                    PerformAction();
                 }
                 else
                 {
@@ -83,9 +85,10 @@ public class Enemy : Character
             //if player is behind enemy
             else if (_playerTransform.position.x > transform.position.x)
             {
-                if (checkAttackRadius(_playerTransform.position.x, transform.position.x))
+                if (CheckAttackRadius(_playerTransform.position.x, transform.position.x))
                 {
                     // ATTACK
+                    PerformAction();
                 }
                 else
                 {
@@ -103,7 +106,10 @@ public class Enemy : Character
 
     public override void PerformAction()
     {
-        throw new System.NotImplementedException();
+        if (!action.activeSelf)
+        {
+            action.SetActive(true);
+        }
     }
 
     public new void TakeDamage(int damage)

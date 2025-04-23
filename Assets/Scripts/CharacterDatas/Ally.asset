@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66235e283a1929748abfe33a53ccf208, type: 3}
-  m_Name: Enemy
+  m_Name: Ally
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  moveSpeed: 50
-  damage: 1
-  animController: {fileID: 9100000, guid: 40ffa3d7e5d87f546abf7292e87d969e, type: 2}
+  maxHealth: 1
+  moveSpeed: 0
+  damage: 0
+  animController: {fileID: 0}

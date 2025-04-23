@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // TODO trigger game over state
+        Debug.Log("Game over!");
     }
 
     public void AddToScore(int scoreToAdd)

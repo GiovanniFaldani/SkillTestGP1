@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : Character
 {
@@ -18,6 +19,7 @@ public class Player : Character
 
     void Update()
     {
+        CheckHealth();
         UpdateTimers();
         GetInput();
         Flip();
@@ -25,6 +27,15 @@ public class Player : Character
         Jump();
         InvincibleBlink();
         PerformAction();
+    }
+
+    private void CheckHealth()
+    {
+        if (health.currentHealth <= 0)
+        {
+            GameManager.instance.GameOver();
+            Time.timeScale = 0f;
+        }
     }
 
     private void UpdateTimers()
@@ -129,6 +140,14 @@ public class Player : Character
         }
         _spriteRenderer.enabled = true;
         _doBlink = true;
+    }
+
+    public new void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        _invincibleTimer = 0.2f;
+        StartCoroutine(BlinkSprite());
+        _doBlink = false;
     }
 
     public int GetDamage()

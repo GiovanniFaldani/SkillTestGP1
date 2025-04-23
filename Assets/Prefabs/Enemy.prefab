@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2811085348042742560}
   - component: {fileID: 8199551658947855596}
   - component: {fileID: 4434335771768626700}
+  - component: {fileID: 6594818517870082845}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -147,6 +148,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6594818517870082845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782706324865001148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369e301146d83214789acd07f1457a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1547991294007312247
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,5 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 1b945b0e2f997654bb40d10f58e3ef6f, type: 2}
+  _invincibleTimer: 0
+  followRadius: 5
+  attackRadius: 1
   score: 100
   action: {fileID: 782706324865001148}
