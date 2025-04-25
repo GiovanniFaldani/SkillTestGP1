@@ -106,6 +106,7 @@ public class Enemy : Character
 
     public override void PerformAction()
     {
+        // Attack the player
         if (!action.activeSelf)
         {
             action.SetActive(true);

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6594818517870082845}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: EnemyAction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -290,7 +290,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 799ec8b14b4259849ade687649a45ff5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -362,6 +362,6 @@ MonoBehaviour:
   characterData: {fileID: 11400000, guid: 1b945b0e2f997654bb40d10f58e3ef6f, type: 2}
   _invincibleTimer: 0
   followRadius: 5
-  attackRadius: 1
+  attackRadius: 2
   score: 100
   action: {fileID: 782706324865001148}

@@ -9,13 +9,6 @@ public class Ally : Character
 
     private Transform _playerTransform;
 
-    public override void PerformAction()
-    {
-        // heal the player
-        throw new System.NotImplementedException();
-    }
-
-
     void Start()
     {
         _playerTransform = FindFirstObjectByType<Player>().transform;
@@ -95,6 +88,14 @@ public class Ally : Character
         {
             // IDLE
             x = 0;
+        }
+    }
+    public override void PerformAction()
+    {
+        // heal the player
+        if (!action.activeSelf)
+        {
+            action.SetActive(true);
         }
     }
 

@@ -114,7 +114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd86c64387c6634081980054f54c6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionTimer: 0
 --- !u!1 &8932129400844909976
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: b6aa2172dd5d94c41a5c6c8c8d772acf, type: 2}
+  _invincibleTimer: 0
   jumpForce: 7
   action: {fileID: 1795504166295609419}
 --- !u!61 &2716772139722053898

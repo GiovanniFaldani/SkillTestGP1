@@ -22,6 +22,7 @@ public class Collectible : MonoBehaviour
                     break;
             }
             GameManager.instance.AddToScore(collectibleData.score);
+            GameManager.instance.AddCollectible();
             Destroy(this.gameObject);
         }
     }

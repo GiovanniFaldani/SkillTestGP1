@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour
     [Header("Debug variables")]
     [SerializeField] private int score;
     [SerializeField] private int bestScore;
+
+    private int _collectibleTotal;
+    private int _collectibleCount = 0;
 
     private void Awake()
     {
@@ -27,6 +31,12 @@ public class GameManager : MonoBehaviour
         {
             bestScore = PlayerPrefs.GetInt("BestScore");
         }
+    }
+
+    public void Start()
+    {
+        // Enumerate number of colectibles for victory
+        _collectibleTotal = FindObjectsByType<Collectible>(FindObjectsSortMode.None).Length;
     }
 
     public void GameOver()
@@ -50,6 +60,20 @@ public class GameManager : MonoBehaviour
         {
             bestScore = newBestScore;
             PlayerPrefs.SetInt("BestScore", bestScore);
+        }
+    }
+
+    public void WinGame()
+    {
+        // TODO display win screen
+    }
+
+    public void AddCollectible()
+    {
+        _collectibleCount++;
+        if(_collectibleCount == _collectibleTotal)
+        {
+            WinGame();
         }
     }
 }
