@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectibleName: SpeedUp
   score: 100
-  effect: 1
+  effect: 2
   healAmount: 0
   duration: 10
   speedBonus: 1.5

@@ -107,7 +107,7 @@ public class Player : Character
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor") && collision.contacts[0].normal == Vector2.up)
         {
             isGrounded = true;
             _stateController.ChangeState(_stateController.idleState);
@@ -164,6 +164,11 @@ public class Player : Character
     public int GetDamage()
     {
         return this.damage;
+    }
+
+    public int GetCurrentHP()
+    {
+        return health.currentHealth;
     }
 
 }

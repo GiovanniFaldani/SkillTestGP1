@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   maxHealth: 5
-  moveSpeed: 50
+  moveSpeed: 200
   damage: 1
   animController: {fileID: 9100000, guid: 40ffa3d7e5d87f546abf7292e87d969e, type: 2}

@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance {  get; private set; }
 
     [Header("Debug variables")]
-    [SerializeField] private int score;
-    [SerializeField] private int bestScore;
+    [SerializeField] public int score;
+    [SerializeField] public int bestScore;
 
-    private int _collectibleTotal;
-    private int _collectibleCount = 0;
+    public int _collectibleTotal;
+    public int _collectibleCount = 0;
 
     private void Awake()
     {
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         // TODO trigger game over state
         Debug.Log("Game over!");
+        Time.timeScale = 0.0f;
     }
 
     public void AddToScore(int scoreToAdd)
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         // TODO display win screen
+        Debug.Log("Victory!");
+        Time.timeScale = 0.0f;
     }
 
     public void AddCollectible()

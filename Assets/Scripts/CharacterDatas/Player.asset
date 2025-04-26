@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   maxHealth: 10
-  moveSpeed: 200
+  moveSpeed: 400
   damage: 2
   animController: {fileID: 9100000, guid: 702ab4db15d102b409fca6c8019b9863, type: 2}
