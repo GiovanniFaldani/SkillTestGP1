@@ -59,13 +59,14 @@ public class Ally : Character
             {
                 if (CheckAttackRadius(_playerTransform.position.x, transform.position.x))
                 {
-                    // ATTACK
+                    // HEAL
                     PerformAction();
                 }
                 else
                 {
                     // MOVE
                     x = -1;
+                    _stateController.ChangeState(_stateController.moveState);
                 }
 
             }
@@ -74,13 +75,14 @@ public class Ally : Character
             {
                 if (CheckAttackRadius(_playerTransform.position.x, transform.position.x))
                 {
-                    // ATTACK
+                    // HEAL
                     PerformAction();
                 }
                 else
                 {
                     // MOVE
                     x = 1;
+                    _stateController.ChangeState(_stateController.moveState);
                 }
             }
         }
@@ -88,6 +90,7 @@ public class Ally : Character
         {
             // IDLE
             x = 0;
+            _stateController.ChangeState(_stateController.idleState);
         }
     }
     public override void PerformAction()
@@ -95,6 +98,7 @@ public class Ally : Character
         // heal the player
         if (!action.activeSelf)
         {
+            _stateController.ChangeState(_stateController.actionState);
             action.SetActive(true);
         }
     }

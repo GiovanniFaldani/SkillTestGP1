@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 722398324619923282}
   - component: {fileID: 4422749677749694436}
   - component: {fileID: 1501756545871574361}
+  - component: {fileID: -9130845721772498700}
   - component: {fileID: 2716772139722053898}
   m_Layer: 0
   m_Name: Player
@@ -317,6 +318,18 @@ MonoBehaviour:
   _invincibleTimer: 0
   jumpForce: 7
   action: {fileID: 1795504166295609419}
+--- !u!114 &-9130845721772498700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932129400844909976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c11ec015141f95419e3a6d91c2e0e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &2716772139722053898
 BoxCollider2D:
   m_ObjectHideFlags: 0

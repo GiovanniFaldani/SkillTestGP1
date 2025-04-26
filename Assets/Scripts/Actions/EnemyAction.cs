@@ -7,6 +7,8 @@ public class EnemyAction : MonoBehaviour
     private int damage;
     private Collider2D hitbox;
 
+    private StateController _stateController;
+
     private void OnEnable()
     {
         actionTimer = actionDuration;
@@ -17,6 +19,7 @@ public class EnemyAction : MonoBehaviour
     private void Start()
     {
         damage = GetComponentInParent<Enemy>().GetDamage();
+        _stateController = GetComponentInParent<StateController>();
         hitbox = GetComponent<Collider2D>();
         hitbox.enabled = false;
     }
@@ -26,6 +29,7 @@ public class EnemyAction : MonoBehaviour
         actionTimer -= Time.deltaTime;
         if (actionTimer < 0)
         {
+            _stateController.ChangeState(_stateController.idleState);
             hitbox.enabled = false;
             this.gameObject.SetActive(false);
         }

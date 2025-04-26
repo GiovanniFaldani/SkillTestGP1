@@ -17,6 +17,7 @@ public abstract class Character : MonoBehaviour
     protected Rigidbody2D _rb;
     protected Animator _animator;
     protected SpriteRenderer _spriteRenderer;
+    protected StateController _stateController;
 
     // movement
     [Range(-1,1)] protected float x;
@@ -32,6 +33,7 @@ public abstract class Character : MonoBehaviour
         moveSpeed = characterData.moveSpeed;
         damage = characterData.damage;
         _animator.runtimeAnimatorController = characterData.animController;
+        _stateController = GetComponent<StateController>();
     }
 
     private void Start()

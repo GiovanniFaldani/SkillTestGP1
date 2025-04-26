@@ -79,6 +79,7 @@ public class Enemy : Character
                 {
                     // MOVE
                     x = -1;
+                    _stateController.ChangeState(_stateController.moveState);
                 }
 
             }
@@ -94,6 +95,7 @@ public class Enemy : Character
                 {
                     // MOVE
                     x = 1;
+                    _stateController.ChangeState(_stateController.moveState);
                 }
             }
         }
@@ -101,6 +103,7 @@ public class Enemy : Character
         {
             // IDLE
             x = 0;
+            _stateController.ChangeState(_stateController.idleState);
         }
     }
 
@@ -109,6 +112,7 @@ public class Enemy : Character
         // Attack the player
         if (!action.activeSelf)
         {
+            _stateController.ChangeState(_stateController.actionState);
             action.SetActive(true);
         }
     }

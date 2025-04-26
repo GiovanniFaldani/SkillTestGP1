@@ -71,12 +71,18 @@ public class Player : Character
             _spriteRenderer.flipX = true;
             Vector3 pos = action.transform.localPosition;
             action.transform.localPosition = new Vector3(-0.2f, pos.y, pos.z);
+            _stateController.ChangeState(_stateController.moveState);
         }
         else if (x > 0)
         {
             _spriteRenderer.flipX = false;
             Vector3 pos = action.transform.localPosition;
             action.transform.localPosition = new Vector3(0.2f, pos.y, pos.z);
+            _stateController.ChangeState(_stateController.moveState);
+        }
+        else
+        {
+            _stateController.ChangeState(_stateController.idleState);
         }
     }
 
@@ -86,6 +92,7 @@ public class Player : Character
         {
             _rb.AddForce(new Vector2(0, Mathf.Round(y)) * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
+            _stateController.ChangeState(_stateController.jumpState);
         }
     }
 
@@ -93,14 +100,17 @@ public class Player : Character
     {
         if(Input.GetAxis("Fire1") > 0)
         {
+            _stateController.ChangeState(_stateController.actionState);
             action.SetActive(true);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor")){
+        if (collision.gameObject.CompareTag("Floor"))
+        {
             isGrounded = true;
+            _stateController.ChangeState(_stateController.idleState);
         }
     }
 
@@ -109,6 +119,7 @@ public class Player : Character
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = false;
+            _stateController.ChangeState(_stateController.jumpState);
         }
     }
 
