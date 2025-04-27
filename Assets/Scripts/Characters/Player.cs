@@ -6,10 +6,14 @@ public class Player : Character
 {
     [SerializeField] private float jumpForce;
     [SerializeField] private GameObject action;
-    private bool isGrounded = false;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] float xSpeedCap;
+    [SerializeField] float ySpeedCap;
+
 
     private float _baseSpeed;
     private bool _doBlink = true;
+    private Vector2 _surfaceNormal = Vector2.up;
 
 
     void Start()
@@ -23,10 +27,21 @@ public class Player : Character
         UpdateTimers();
         GetInput();
         Flip();
-        Movement();
         Jump();
         InvincibleBlink();
         PerformAction();
+    }
+    private void FixedUpdate()
+    {
+        CapSpeed();
+        Movement();
+    }
+
+    private void CapSpeed()
+    {
+        if(_rb.linearVelocityX > xSpeedCap) _rb.linearVelocityX = xSpeedCap;
+        if (_rb.linearVelocityX < -xSpeedCap) _rb.linearVelocityX = -xSpeedCap;
+        if(_rb.linearVelocityY > ySpeedCap) _rb.linearVelocityY = ySpeedCap;
     }
 
     private void CheckHealth()
@@ -50,6 +65,7 @@ public class Player : Character
         }
         if (_invincibleTimer > 0)
         {
+            health.invincible = true;
             _invincibleTimer -= Time.deltaTime;
             if(_invincibleTimer <= 0)
             {
@@ -88,9 +104,10 @@ public class Player : Character
 
     private void Jump()
     {
-        if (isGrounded && y > 0) 
+        if (isGrounded && y > 0 && (Vector2.Dot(_surfaceNormal, Vector2.up) >= 0.5f)) // As long as the slope is less than 45°, allow jump
         {
-            _rb.AddForce(new Vector2(0, Mathf.Round(y)) * jumpForce, ForceMode2D.Impulse);
+            // Jump in the direction of the surface normal
+            _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
             _stateController.ChangeState(_stateController.jumpState);
         }
@@ -107,10 +124,11 @@ public class Player : Character
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor") && collision.contacts[0].normal == Vector2.up)
+        if (collision.gameObject.CompareTag("Floor") && Vector2.Dot(collision.contacts[0].normal, Vector2.up) >= 0.5f) // Only return grounded on inclines smaller than 45°
         {
             isGrounded = true;
             _stateController.ChangeState(_stateController.idleState);
+            _surfaceNormal = collision.contacts[0].normal;
         }
     }
 
@@ -156,9 +174,12 @@ public class Player : Character
     public new void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
-        _invincibleTimer = 0.2f;
-        StartCoroutine(BlinkSprite());
-        _doBlink = false;
+        if (!health.invincible)
+        {
+            _invincibleTimer = 0.2f;
+            StartCoroutine(BlinkSprite());
+            _doBlink = false;
+        }
     }
 
     public int GetDamage()

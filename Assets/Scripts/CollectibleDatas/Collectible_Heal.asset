@@ -15,6 +15,6 @@ MonoBehaviour:
   collectibleName: Healing
   score: 100
   effect: 0
-  healAmount: 1
+  healAmount: 3
   duration: 0
   speedBonus: 0

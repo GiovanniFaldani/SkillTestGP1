@@ -4,23 +4,62 @@ using UnityEngine;
 
 public class UIUpdater : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI healthDisplay;
-    [SerializeField] TextMeshProUGUI scoreDisplay;
-    [SerializeField] TextMeshProUGUI collected;
+    // Singleton managed by GameManager
+    public static UIUpdater instance {  get; private set; }
 
-    private Player player;
+    [SerializeField] GameObject menuScreen;
+    [SerializeField] GameObject pauseScreen;
+    [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject winScreen;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        player = FindFirstObjectByType(typeof(Player)).GetComponent<Player>();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        // Display main menu
+        DisplayMainMenu();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisplayMainMenu()
     {
-        healthDisplay.text = "HP: " + player.GetCurrentHP();
-        scoreDisplay.text = "Score: " + GameManager.instance.score;
-        collected.text = "Collectibles: " + GameManager.instance._collectibleCount + "/" + GameManager.instance._collectibleTotal;
+        menuScreen.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1.0f;
+        menuScreen.SetActive(false);
+    }
+
+    public void DisplayPauseMenu()
+    {
+        pauseScreen.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1.0f;
+        pauseScreen.SetActive(false);
+    }
+
+    public void DisplayGameOverScreen()
+    {
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void DisplayWinScreen()
+    {
+        winScreen.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 }

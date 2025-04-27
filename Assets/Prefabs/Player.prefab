@@ -318,6 +318,8 @@ MonoBehaviour:
   _invincibleTimer: 0
   jumpForce: 7
   action: {fileID: 1795504166295609419}
+  isGrounded: 1
+  _surfaceNormal: {x: 0, y: 1}
 --- !u!114 &-9130845721772498700
 MonoBehaviour:
   m_ObjectHideFlags: 0

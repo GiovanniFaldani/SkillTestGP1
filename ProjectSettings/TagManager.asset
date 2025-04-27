@@ -11,6 +11,7 @@ TagManager:
   - PlayerAction
   - EnemyAction
   - AllyAction
+  - Platform
   layers:
   - Default
   - TransparentFX

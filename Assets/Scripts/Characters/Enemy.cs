@@ -6,6 +6,7 @@ public class Enemy : Character
     [SerializeField] private float followRadius;
     [SerializeField] private float attackRadius;
     [SerializeField] private int score;
+    [SerializeField] private float rotateSpeed;
     [SerializeField] private GameObject action;
 
     private Transform _playerTransform;
@@ -23,6 +24,10 @@ public class Enemy : Character
         CheckHealth();
         CheckAttackAndMovement();
         Flip();
+    }
+
+    private void FixedUpdate()
+    {
         Movement();
     }
 
@@ -33,6 +38,15 @@ public class Enemy : Character
             GameManager.instance.AddToScore(score);
             Destroy(this.gameObject);
         }
+    }
+
+    private void FacePlayer()
+    {
+        this.transform.rotation = Quaternion.Lerp(
+            this.transform.rotation,
+            Quaternion.LookRotation(_playerTransform.position - this.transform.position),
+            rotateSpeed
+            ) * Quaternion.Euler(0, 90, 0);
     }
 
     private void Flip()
@@ -67,6 +81,8 @@ public class Enemy : Character
     {
         if (CheckFollowRadius(_playerTransform.position.x, transform.position.x))
         {
+            // Stop rotating
+            this.transform.rotation = Quaternion.Euler(0,0,0);
             //if player in front of the enemy
             if (_playerTransform.position.x < transform.position.x)
             {
@@ -103,6 +119,7 @@ public class Enemy : Character
         {
             // IDLE
             x = 0;
+            FacePlayer();
             _stateController.ChangeState(_stateController.idleState);
         }
     }

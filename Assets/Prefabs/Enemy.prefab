@@ -319,6 +319,7 @@ MonoBehaviour:
   followRadius: 5
   attackRadius: 2
   score: 100
+  rotateSpeed: 10
   action: {fileID: 782706324865001148}
 --- !u!114 &5494086463474334396
 MonoBehaviour:

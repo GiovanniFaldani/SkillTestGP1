@@ -43,7 +43,7 @@ public abstract class Character : MonoBehaviour
 
     public void Movement()
     {
-        _rb.linearVelocity = new Vector2(x * moveSpeed * Time.deltaTime, _rb.linearVelocity.y);
+        _rb.linearVelocityX = x * moveSpeed * Time.fixedDeltaTime;
     }
 
     public void AddHealth(int addMe)

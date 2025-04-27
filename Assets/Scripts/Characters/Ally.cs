@@ -19,6 +19,10 @@ public class Ally : Character
     {
         CheckAttackAndMovement();
         Flip();
+    }
+
+    private void FixedUpdate()
+    {
         Movement();
     }
 
